@@ -18,8 +18,9 @@ CMAIN:
     
 iterare:
     INC ecx
-    cmp ecx, nums                ; Verific daca am iterat toate elementele
-    jge final                    ; In caz de se verifica, se termina executia 
+        
+    cmp ecx, [nums]                ; Verific daca am iterat toate elementele
+    je final                    ; In caz de se verifica, se termina executia 
 
     mov ebx, [base_array + 4 * ecx]
     
@@ -51,7 +52,7 @@ printare:
     PRINT_HEX 2, dx
     
     jmp printare
-    
+
 bazainc:
     PRINT_STRING incorect
     jmp iterare                ; Trec la urmatorul element
