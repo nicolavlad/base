@@ -46,15 +46,23 @@ transformare:
 
 printare:
     cmp esp, ebp
+    je newline
+
+DeAici:                         ; Am pus acest label pentru a nu pune o infinitate de newline-uri
+    cmp esp, ebp                
     je iterare
     
     pop dx
     PRINT_HEX 2, dx
     
-    jmp printare
+    jmp DeAici
 
+newline:
+    NEWLINE
+    jmp label
 bazainc:
     PRINT_STRING incorect
+    NEWLINE
     jmp iterare                ; Trec la urmatorul element
     
 final:
