@@ -8,8 +8,6 @@ section .text
 global CMAIN
 CMAIN:
     mov ebp, esp
-    xor eax, eax
-    xor edx, edx
 
     mov ecx, -1                 ; Pentru a putea incrementa in iterare
     
@@ -27,17 +25,19 @@ iterare:
     jg bazainc
     
 memorare:                       ; Recurenta pentru retinerea corecta a numarului
-    mov dx, [nums_array + 4*ecx + 2]
-    mov ax, [nums_array + 4*ecx]
+    mov edx, [nums_array + 4*ecx + 2]
+    mov eax, [nums_array + 4*ecx]
     
 transformare:
-    div bx
-    push dx
+    xor edx, edx                ; Curat garbage-ul ramas pentru a nu imi interpreta edx ca o parte din deimpartit
+
+    div ebx                     
+    push edx                    ; Pun restul pe stiva
     
-    cmp ax, 0                   ; Daca avem rezultat zero, insemna ca am ajuns la ultimul element
+    cmp eax, 0                  ; Daca avem rezultat zero, insemna ca am ajuns la ultimul element
     je printare                 ; Asa ca putem printa numarul de pe stiva
     
-    mov dx, 0                   
+    mov edx, 0                   
     
     jmp transformare            ; Fac loop pana cand transform tot numarul
 
@@ -49,8 +49,8 @@ DeAici:                         ; Am pus acest label pentru a nu pune o infinita
     cmp esp, ebp                ; Se continua cu urmatorul numar
     je iterare
     
-    pop dx                      ; Iau de pe stiva si printez in ordinea corecta
-    PRINT_HEX 2, dx
+    pop edx                     ; Iau de pe stiva si printez in ordinea corecta
+    PRINT_HEX 4, edx
     
     jmp printare
 
