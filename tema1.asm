@@ -1,26 +1,23 @@
 %include "io.inc"
 
 section .data
-   ;%include "input.inc"
-   nums dd 4
-   nums_array dd 612, 1330, 7, 12988
-   base_array dd 16, 1, 2, 14
+   %include "input.inc"
    incorect db "Baza incorecta", 0
       
 section .text
 global CMAIN
 CMAIN:
-    mov ebp, esp; for correct debugging
+    mov ebp, esp
     xor eax, eax
     xor edx, edx
-    mov ebp, esp
-    mov ecx, -1                 ; Pentru a putea incrementa in memorare
+
+    mov ecx, -1                 ; Pentru a putea incrementa in iterare
     
 iterare:
     INC ecx
         
-    cmp ecx, [nums]                ; Verific daca am iterat toate elementele
-    je final                    ; In caz de se verifica, se termina executia 
+    cmp ecx, [nums]             ; Verific daca am iterat toate elementele
+    je final                    
 
     mov ebx, [base_array + 4 * ecx]
     
@@ -29,7 +26,7 @@ iterare:
     cmp ebx, 16
     jg bazainc
     
-memorare:
+memorare:                       ; Recurenta pentru retinerea corecta a numarului
     mov dx, [nums_array + 4*ecx + 2]
     mov ax, [nums_array + 4*ecx]
     
@@ -40,7 +37,7 @@ transformare:
     cmp ax, 0                   ; Trecem la urmatorul numar
     je printare
     
-    mov dx, 0
+    mov dx, 0                   
     
     jmp transformare            ; Fac loop pana cand transform tot numarul
 
@@ -49,21 +46,22 @@ printare:
     je newline
 
 DeAici:                         ; Am pus acest label pentru a nu pune o infinitate de newline-uri
-    cmp esp, ebp                
+    cmp esp, ebp                ; Se continua cu urmatorul numar
     je iterare
     
-    pop dx
+    pop dx                      ; Iau de pe stiva si printez in ordinea corecta
     PRINT_HEX 2, dx
     
-    jmp DeAici
+    jmp printare
 
-newline:
+newline:                        ; Label pentru newline-uri
     NEWLINE
-    jmp label
-bazainc:
+    jmp DeAici
+    
+bazainc:                        ; Printez stringul definit in section .data
     PRINT_STRING incorect
     NEWLINE
-    jmp iterare                ; Trec la urmatorul element
+    jmp iterare                 ; Trec la urmatorul element
     
-final:
+final:                          
     ret
