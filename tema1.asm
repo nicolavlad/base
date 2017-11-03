@@ -11,8 +11,13 @@ global CMAIN
 CMAIN:
     xor eax, eax
     xor edx, edx
+    xor ecx, ecx
+    PRINT_CHAR [hexa]           ; Apelezi cu adresa + offset
     
-    PRINT_CHAR [hexa]       ; Apelezi cu adresa + offset
+memorare:
+    mov ebx, [base_array + 4 * ecx] 
+    
+    mov dx, [num + 4*ecx + 2]   ; Pentru a lua partea high
+    mov ax, [num + 4*ecx]       ; Partea low o retin in ax because Little Endian
     
     
-    ret
