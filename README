@@ -1,2 +1,3 @@
+Ai uitat sa pui pe stiva, dupa sa reusesti sa printezi de pe ea.
 
-Am declarat si un sir de caractere pentru numerele de la 0-9 pentru usurinta atunci cand voi da push pe stiva coeficientilor pentru a ii printa in ordinea inversa.
+Sa vezi cu faci 0 pe cealalta parte de 16biti de langa dx, pentru a putea face offset cu edx, pentru ca nu merge cu dx

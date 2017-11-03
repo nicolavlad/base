@@ -13,6 +13,7 @@ global CMAIN
 CMAIN:
     xor eax, eax
     xor edx, edx
+    mov ebp, esp
     mov ecx, -1                 ; Pentru a putea incrementa in memorare
     
 iterare:
@@ -33,7 +34,7 @@ memorare:
     
 transformare:
     div bx
-    PRINT_CHAR [caractere + dx]
+    push [caractere + dx]
     
     cmp ax, 0                   ; Am terminat transformarea, pentru asta punem newline
     NEWLINE
