@@ -34,8 +34,8 @@ transformare:
     div bx
     push dx
     
-    cmp ax, 0                   ; Trecem la urmatorul numar
-    je printare
+    cmp ax, 0                   ; Daca avem rezultat zero, insemna ca am ajuns la ultimul element
+    je printare                 ; Asa ca putem printa numarul de pe stiva
     
     mov dx, 0                   
     

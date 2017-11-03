@@ -1,3 +1,8 @@
-Ai uitat sa pui pe stiva, dupa sa reusesti sa printezi de pe ea.
+Pentru aceasta tema, am incercat sa fac transformarea prin impartire repetata.
+Atunci cand impartim, ordinea termenilor rezultati e inversa fata de cea corecta.
 
-Sa vezi cu faci 0 pe cealalta parte de 16biti de langa dx, pentru a putea face offset cu edx, pentru ca nu merge cu dx
+Asa ca am pus pe stiva rezultatul impartirii efectuate pana cand am dat de 0 ca rezultat al impartirii.
+
+Dupa am scos de pe stiva si am printat fiecare element de pe stiva.
+
+Apoi repetam tot procedeul pentru urmatorul element, si tot asa, pana cand ramanem fara elemente in array
