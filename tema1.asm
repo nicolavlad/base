@@ -11,13 +11,20 @@ global CMAIN
 CMAIN:
     xor eax, eax
     xor edx, edx
-    xor ecx, ecx
+    mov ecx, -1                 ; Pentru a putea incrementa in memorare
     PRINT_CHAR [hexa]           ; Apelezi cu adresa + offset
     
 memorare:
-    mov ebx, [base_array + 4 * ecx] 
-    
+    INC ecx
+    mov ebx, [base_array + 4 * ecx]
+    cmp ecx, nums + 1           ; Verific daca am iterat toate elementele  
+    je final                    
+
+transformare:  
     mov dx, [num + 4*ecx + 2]   ; Pentru a lua partea high
     mov ax, [num + 4*ecx]       ; Partea low o retin in ax because Little Endian
     
+    div bx
     
+    ; Cand o sa transformi restul in caracter sa verifici de fiecare data
+    ; Daca este ax = 0 dupa printare, pentru a putea itera elementele 
